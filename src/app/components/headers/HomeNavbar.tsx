@@ -52,7 +52,37 @@ export function HomeNavbar() {
                         />)}
                     </Stack>
 
-                    <Box>3</Box>
+
+                </Stack>
+
+
+                <Stack className={"header-frame"}>
+                    <Stack className={"detail"}>
+                        <Box className={"head-main-txt"}>
+                            World's The Most Delicious Cousine
+                        </Box>
+                        <Box className={"wel-txt"}>
+                            The Choice, not just a Choice
+                        </Box>
+                        <Box className={"service-txt"}>
+                            24 hours Service
+                        </Box>
+
+                        <Box className={"signup"}>
+                            {!authUser ? (
+                                <Button variant="contained" className="signup-button">
+
+                                </Button>
+                            ) : null}
+                        </Box>
+                    </Stack>
+
+                    <Box className={"logo-frame"}>
+                        <div className="logo-img">
+                            
+                        </div>
+                    </Box>
+
                 </Stack>
 
             </Container>
