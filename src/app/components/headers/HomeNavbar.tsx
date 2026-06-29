@@ -60,7 +60,6 @@ export function HomeNavbar() {
                     <Box>3</Box>
                 </Stack>
 
-                <Stack>DETAIL</Stack>
             </Container>
         </div >
     )
