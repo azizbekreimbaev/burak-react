@@ -1,29 +1,21 @@
 import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { Stack } from "@mui/system";
+import { height, Stack } from "@mui/system";
 import { NavLink } from "react-router-dom";
 
 export function HomeNavbar() {
     const authUser = null
     return (
         <div className="home-navbar">
-            <Container sx={{ mt: "55px", height: "642px" }}>
-                <Stack direction={"row"} sx={{
-                    minWidth: "700px",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                }}>
+            <Container className="navbar-container">
+                <Stack className="menu">
                     <Box>
                         <NavLink to="/">
-                            <img src="/icons/burak.svg" style={{ width: "125px", height: "30px" }}></img>
+                            <img className="brand-logo" src="/icons/burak.svg" style={{ width: "125px", height: "30px" }}></img>
                         </NavLink>
                     </Box>
-                    <Stack direction={"row"} sx={{
-                        minWidth: "700px",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                    }}>
+                    <Stack className="links">
                         <Box className={"hover-line"}>
                             <NavLink activeClassName={"underline"} to="/">Home</NavLink>
                         </Box>
@@ -50,11 +42,14 @@ export function HomeNavbar() {
 
                         {!authUser ? (
                             <Box>
-                                <Button variant="contained" style={{ background: "#3776CC", color: "#f8f8ff" }}>
+                                <Button className="login-button" variant="contained" style={{ background: "#3776CC", color: "#f8f8ff" }}>
                                     Login
                                 </Button>
                             </Box>
-                        ) : (<img />)}
+                        ) : (<img style={{ width: "50px", height: "50px", borderRadius: "24px" }}
+                            src={"/icons/default-user.svg"}
+                            aria-haspopup={"true"}
+                        />)}
                     </Stack>
 
                     <Box>3</Box>
