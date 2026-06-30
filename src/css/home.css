@@ -1,0 +1,14 @@
+.homepage {
+    width: 100%;
+    height: auto;
+}
+
+/* .homepage .sec-main-box {
+    display: flex;
+} */
+.homepage .sec-main-box .foot-category-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+}
