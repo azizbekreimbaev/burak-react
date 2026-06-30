@@ -3,20 +3,11 @@
     height: auto;
 }
 
-/* .homepage .sec-main-box {
-    display: flex;
-} */
-.homepage .sec-main-box .foot-category-link {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
+/* STATISTICS */
 .homepage .static-frame {
     width: 100%;
     height: 236px;
-    background-color: #343434;
+    background: #343434;
 }
 
 .homepage .static-frame .info {
@@ -32,8 +23,8 @@
     height: 116px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .homepage .static-frame .info .static-box .static-num {
@@ -42,26 +33,26 @@
     font-size: 54px;
     font-style: normal;
     font-weight: 600;
-    line-height: normal;
+    line-height: 80px;
     color: #d7b686;
 }
 
 .homepage .static-frame .info .static-box .static-text {
     text-align: center;
     font-family: Poppins;
-    font-size: 20Wpx;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 30px;
     color: #d7b686;
 }
 
+/* POPULAR DISHES */
 .homepage .popular-dishes-frame {
     width: 100%;
-    height: 236px;
-    background: #343434;
+    height: 580px;
     display: flex;
-    background-color: #f8f8f8;
+    background: #f8f8ff;
 }
 
 .homepage .popular-dishes-frame .popular-section {
@@ -71,28 +62,29 @@
     align-items: center;
 }
 
-.homepage .popular-dishes-frame .popular-section .cards-frame {
-    width: 100%;
-    margin-top: 43px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.homepage .popular-dishes-frame .popular-section .category-title {
+    text-align: center;
+    font-family: "Roboto Serif";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1.44px;
+    color: #000;
 }
 
-.homepage .popular-dishes-frame .cards-frame {
+.homepage .popular-dishes-frame .popular-section .cards-frame {
     width: 100%;
+    margin: 43px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
 .homepage .popular-dishes-frame .cards-frame .card {
-    width: 280px;
-    height: 350px;
+    min-height: 430px;
+    min-width: 300px;
     cursor: pointer;
-    overflow: hidden;
-    border-radius: 16px;
 }
 
 .homepage .popular-dishes-frame .cards-frame .card .card-cover {
@@ -100,12 +92,6 @@
             rgba(0, 0, 0, 0.4),
             rgba(0, 0, 0, 0) 200px),
         linear-gradient(to top,
-            rgba(0, 0, 0, 0.8),
-            rgba(0, 0, 0, 0) 300px);
-}
-
-.homepage .popular-dishes-frame .cards-frame .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0) 300px)
 }
