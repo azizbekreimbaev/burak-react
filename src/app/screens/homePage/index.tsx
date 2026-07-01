@@ -5,6 +5,7 @@ import NewDishes from "./NewDishes";
 import Advertisement from "./Advertisements";
 import ActiveUsers from "./ActiveUsers";
 import Events from "./Events"
+//@ts-ignore
 import "../../../css/home.css"
 
 export default function HomePage() {
