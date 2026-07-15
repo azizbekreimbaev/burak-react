@@ -4,11 +4,16 @@ import Button from "@mui/material/Button";
 import { height, Stack } from "@mui/system";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
+import React, { useState } from 'react'
 
 export default function HomeNavbar() {
     const authUser = null
 
-    // const [state, setstate] = useState(initialState)
+    const [count, setCount] = useState(0)
+
+    const buttonHandler = () => {
+        setCount(count + 1)
+    }
 
     return (
         <div className="home-navbar">
@@ -70,12 +75,12 @@ export default function HomeNavbar() {
                             The Choice, not just a Choice
                         </Box>
                         <Box className={"service-txt"}>
-                            24 hours Service
+                            {count} hours Service
                         </Box>
 
                         <Box className={"signup"}>
                             {!authUser ? (
-                                <Button variant="contained" className={"signup-button"}>
+                                <Button variant="contained" className={"signup-button"} onClick={buttonHandler}>
                                     Sign Up
                                 </Button>
                             ) : null}
