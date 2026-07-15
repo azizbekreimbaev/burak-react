@@ -13,8 +13,10 @@ import Footer from "./components/footer";
 import "../css/app.css";
 // @ts-ignore: Allow side-effect CSS import without type declarations
 import '../css/navbar.css'
+// @ts-ignore: Allow side-effect CSS import without type declarations
 import '../css/footer.css'
 import HelpPage from "./screens/helpPage";
+import Test from "./screens/Test";
 
 
 function App() {
@@ -39,7 +41,9 @@ function App() {
           <HelpPage />
         </Route>
         <Route path="/">
-          <HomePage />
+          {/* <HomePage /> */}
+          <Test />
+
         </Route>
       </Switch>
       <Footer />

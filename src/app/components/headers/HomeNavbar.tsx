@@ -7,6 +7,9 @@ import Basket from "./Basket";
 
 export default function HomeNavbar() {
     const authUser = null
+
+    // const [state, setstate] = useState(initialState)
+
     return (
         <div className="home-navbar">
             <Container className="navbar-container">
@@ -18,7 +21,7 @@ export default function HomeNavbar() {
                     </Box>
                     <Stack className="links">
                         <Box className={"hover-line"}>
-                            <NavLink activeClassName={"underline"} to="/">Home</NavLink>
+                            <NavLink activeClassName={"underline"} exact to="/">Home</NavLink>
                         </Box>
                         <Box className={"hover-line"}>
                             <NavLink activeClassName={"underline"} to="/products">Products</NavLink>
@@ -72,7 +75,7 @@ export default function HomeNavbar() {
 
                         <Box className={"signup"}>
                             {!authUser ? (
-                                <Button variant="contained" className="signup-button">
+                                <Button variant="contained" className={"signup-button"}>
                                     Sign Up
                                 </Button>
                             ) : null}

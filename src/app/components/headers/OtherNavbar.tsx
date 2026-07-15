@@ -15,7 +15,7 @@ export default function OtherNavbar() {
                     </Box>
                     <Stack className="links">
                         <Box className={"hover-line"}>
-                            <NavLink activeClassName={"underline"} to="/">Home</NavLink>
+                            <NavLink activeClassName={"underline"} exact to="/">Home</NavLink>
                         </Box>
                         <Box className={"hover-line"}>
                             <NavLink activeClassName={"underline"} to="/products">Products</NavLink>
