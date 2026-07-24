@@ -17,12 +17,12 @@ import { serverApi } from "../../../lib/config";
 
 
 /** REDUX SLICE and SELECTOR */
-const popularDishesRetriever = createSelector(retrievePopularDishes, (popularDishes) => ({ popularDishes }))
+const popularDishesRetriever = createSelector(retrievePopularDishes, (popularDishes) => ({ popularDishes })) //9
 
 
 
 export default function PopularDishes() {
-    const { popularDishes } = useSelector(popularDishesRetriever)
+    const { popularDishes } = useSelector(popularDishesRetriever)  //10
     // console.log("asfasd", popularDishes)
     return (
         <div className="popular-dishes-frame">

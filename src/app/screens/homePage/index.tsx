@@ -17,7 +17,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
 
-/** REDUX SLICE and SELECTOR */
+/** REDUX SLICE*/
 const actionDispatch = (dispatch: Dispatch) => ({
     setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
     setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
@@ -43,7 +43,7 @@ export default function HomePage() {
             .then(
                 (data) => {
                     console.log("data pssed here", data)
-                    setPopularDishes(data)
+                    setPopularDishes(data)  //1
                 }
             )
             .catch((err) => { console.log(err) });
