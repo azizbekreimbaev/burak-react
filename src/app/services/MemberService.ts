@@ -49,6 +49,9 @@ class MemberService {
             throw err
         }
     }
+
+
+
     public async login(input: LoginInput): Promise<Member> {
         try {
             const url = this.path + "/member/login";
@@ -59,6 +62,18 @@ class MemberService {
 
         } catch (err) {
             console.log("Error, login", err)
+            throw err
+        }
+    }
+
+    public async logout(): Promise<void> {
+        try {
+            const url = this.path + "/member/logout";
+            const result = await axios.post(url, {}, { withCredentials: true })
+
+            localStorage.removeItem("memberData")
+        } catch (err) {
+            console.log("Error, logout", err)
             throw err
         }
     }
