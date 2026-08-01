@@ -7,55 +7,53 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PausedOrders from "./PausedOrders";
 import ProcessOrders from "./ProcessOrders";
 import FinishedOrders from "./FinishedOrders";
-//@ts-ignore
-import "../../../css/order.css";
-import { Dispatch } from "@reduxjs/toolkit";
-import { Order, OrderInquiry } from "../../../lib/types/order";
-import { setFinishedOrders, setPausedOrders, setProcessOrders } from "./slice";
 import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { setPausedOrders, setProcessOrders, setFinishedOrders } from "./slice";
+import { Order, OrderInquiry } from "../../../lib/types/order";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
+import { useGlobals } from "../../hooks/useGlobals";
+//@ts-ignore
+import "../../../css/order.css";
 
-
-
-/** REDUX SLICE*/
+/**REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
   setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
   setProcessOrders: (data: Order[]) => dispatch(setProcessOrders(data)),
-  setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data))
-})
-
-
-
+  setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data)),
+});
 
 export default function OrdersPage() {
-  const { setPausedOrders, setProcessOrders, setFinishedOrders } = actionDispatch(useDispatch())
+  const { setPausedOrders, setProcessOrders, setFinishedOrders } =
+    actionDispatch(useDispatch());
 
+  const { orderBuilder } = useGlobals();
   const [value, setValue] = useState("1");
-
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     page: 1,
     limit: 5,
-    orderStatus: OrderStatus.PAUSE
-  })
+    orderStatus: OrderStatus.PAUSE,
+  });
 
   useEffect(() => {
     const order = new OrderService();
 
-    order.getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PAUSE })
-      .then((data) => { setPausedOrders(data) })
-      .catch((err) => { console.log(err) })
+    order
+      .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PAUSE })
+      .then((data) => setPausedOrders(data))
+      .catch((err) => console.log(err));
 
-    order.getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PROCESS })
-      .then((data) => { setProcessOrders(data) })
-      .catch((err) => { console.log(err) })
+    order
+      .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PROCESS })
+      .then((data) => setProcessOrders(data))
+      .catch((err) => console.log(err));
 
-    order.getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
-      .then((data) => { setFinishedOrders(data) })
-      .catch((err) => { console.log(err) })
-
-  }, [orderInquiry])
-
+    order
+      .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
+      .then((data) => setFinishedOrders(data))
+      .catch((err) => console.log(err));
+  }, [orderInquiry, orderBuilder]);
 
   /**HANDLERS */
 
@@ -83,8 +81,8 @@ export default function OrdersPage() {
               </Box>
             </Box>
             <Stack className={"order-main-content"}>
-              <PausedOrders />
-              <ProcessOrders />
+              <PausedOrders setValue={setValue} />
+              <ProcessOrders setValue={setValue} />
               <FinishedOrders />
             </Stack>
           </TabContext>

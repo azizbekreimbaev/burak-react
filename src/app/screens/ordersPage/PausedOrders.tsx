@@ -2,27 +2,81 @@ import React from "react";
 import { Box, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import TabPanel from "@mui/lab/TabPanel";
-
-
-
-import { useSelector } from 'react-redux'
-import { createSelector } from 'reselect'
-import { retrievePausedOrders } from './selector'
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrievePausedOrders } from "./selector";
+import { Messages, serverApi } from "../../../lib/config";
+import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
-import { serverApi } from "../../../lib/config";
-import { Order, OrderItem } from "../../../lib/types/order";
+import { T } from "../../../lib/types/common";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { OrderStatus } from "../../../lib/enums/order.enum";
+import { useGlobals } from "../../hooks/useGlobals";
+import OrderService from "../../services/OrderService";
 
+/**REDUX SLICE & SELECTOR */
 
-/** REDUX SLICE and SELECTOR */
-const pausedOrdersRetriever = createSelector(retrievePausedOrders, (pausedOrders) => ({ pausedOrders })) //9
+const pausedOrdersRetriever = createSelector(
+  retrievePausedOrders,
+  (pausedOrders) => ({ pausedOrders }),
+);
 
+interface PausedOrdersProps {
+  setValue: (input: string) => void;
+}
 
+export default function PausedOrders(props: PausedOrdersProps) {
+  const { setValue } = props;
+  const { authMember, setOrderBuilder } = useGlobals();
+  const { pausedOrders } = useSelector(pausedOrdersRetriever);
 
-export default function PausedOrders() {
+  /** HANDLERS */
+  const deleteOrderHandler = async (e: T) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
 
-  const { pausedOrders } = useSelector(pausedOrdersRetriever)
+      const orderId = e.target.value;
+      const input: OrderUpdateInput = {
+        orderId: orderId,
+        orderStatus: OrderStatus.DELETE,
+      };
 
-  
+      const confirmation = window.confirm("Do you want to delete the order?");
+      if (confirmation) {
+        const order = new OrderService();
+        await order.updateOrder(input);
+        setOrderBuilder(new Date());
+      }
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
+
+  const processOrderHandler = async (e: T) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+      // PAYMENT PROCESS
+      const orderId = e.target.value;
+      const input: OrderUpdateInput = {
+        orderId: orderId,
+        orderStatus: OrderStatus.PROCESS,
+      };
+
+      const confirmation = window.confirm(
+        "Do you want to proceed with payment?",
+      );
+      if (confirmation) {
+        const order = new OrderService();
+        await order.updateOrder(input);
+        setValue("2");
+        setOrderBuilder(new Date());
+      }
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
 
   return (
     <TabPanel value={"1"}>
@@ -32,26 +86,22 @@ export default function PausedOrders() {
             <Box key={order._id} className={"order-main-box"}>
               <Box className={"order-box-scroll"}>
                 {order?.orderItems?.map((item: OrderItem) => {
-
-                  const product: Product = order.productData.filter((ele: Product) => {
-                    return item.productId === ele._id
-                  })[0]
-
-                  const imagePath = `${serverApi}/${product.productImages[0]}`
-
+                  const product: Product = order.productData.filter(
+                    (ele: Product) => item.productId === ele._id,
+                  )[0];
+                  const imagePath = `${serverApi}/${product.productImages[0]}`;
                   return (
                     <Box key={item._id} className={"orders-name-price"}>
-                      <img
-                        src={imagePath}
-                        className={"order-dish-img"}
-                      />
+                      <img src={imagePath} className={"order-dish-img"} />
                       <p className={"title-dish"}>{product.productName}</p>
                       <Box className={"price-box"}>
                         <p>${item.itemPrice}</p>
                         <img src={"/icons/close.svg"} />
                         <p>{item.itemQuantity}</p>
                         <img src={"/icons/pause.svg"} />
-                        <p style={{ marginLeft: "15px" }}>${item.itemQuantity * item.itemPrice}</p>
+                        <p style={{ marginLeft: "15px" }}>
+                          ${item.itemQuantity * item.itemPrice}
+                        </p>
                       </Box>
                     </Box>
                   );
@@ -73,13 +123,20 @@ export default function PausedOrders() {
                   <p>${order.orderTotal}</p>
                 </Box>
                 <Button
+                  value={order._id}
                   variant="contained"
                   color="secondary"
                   className={"cancel-button"}
+                  onClick={deleteOrderHandler}
                 >
                   Cancel
                 </Button>
-                <Button variant="contained" className={"pay-button"}>
+                <Button
+                  value={order._id}
+                  variant="contained"
+                  className={"pay-button"}
+                  onClick={processOrderHandler}
+                >
                   Payment
                 </Button>
               </Box>
@@ -87,14 +144,19 @@ export default function PausedOrders() {
           );
         })}
 
-        {!pausedOrders || (pausedOrders.length === 0 && (
-          <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
-            <img
-              src={"/icons/noimage-list.svg"}
-              style={{ width: 300, height: 300 }}
-            />
-          </Box>
-        ))}
+        {!pausedOrders ||
+          (pausedOrders.length === 0 && (
+            <Box
+              display={"flex"}
+              flexDirection={"row"}
+              justifyContent={"center"}
+            >
+              <img
+                src={"/icons/noimage-list.svg"}
+                style={{ width: 300, height: 300 }}
+              />
+            </Box>
+          ))}
       </Stack>
     </TabPanel>
   );
