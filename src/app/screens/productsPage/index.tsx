@@ -4,13 +4,13 @@ import Products from "./Products";
 //@ts-ignore
 import "../../../css/products.css";
 import { CartItem } from "../../../lib/types/search";
+import useBasket from "../../hooks/useBasket";
 
-interface ProductsPageProps {
-    onAdd: (item: CartItem) => void
-}
+// interface ProductsPageProps {
+//     onAdd: (item: CartItem) => void
+// }
 
-export default function ProductsPage(props: ProductsPageProps) {
-    const { onAdd } = props
+export default function ProductsPage() {
 
 
     const products = useRouteMatch();
@@ -20,10 +20,10 @@ export default function ProductsPage(props: ProductsPageProps) {
         <div className={"products-page"}>
             <Switch>
                 <Route path={`${products.path}/:productId`}>
-                    <ChosenProduct onAdd={onAdd} />
+                    <ChosenProduct />
                 </Route>
                 <Route path={`${products.path}`}>
-                    <Products onAdd={onAdd} />
+                    <Products />
                 </Route>
             </Switch>
         </div>

@@ -5,13 +5,14 @@ import { CartItem } from "../../../lib/types/search";
 import { useGlobals } from "../../hooks/useGlobals";
 import { serverApi } from "../../../lib/config";
 import { Logout } from "@mui/icons-material";
+import useBasket from "../../hooks/useBasket";
 
 interface OtherNavbarProps {
-    cartItems: CartItem[];
-    onAdd: (item: CartItem) => void
-    onRemove: (item: CartItem) => void
-    onDelete: (item: CartItem) => void
-    onDeleteAll: () => void
+    // cartItems: CartItem[];
+    // onAdd: (item: CartItem) => void
+    // onRemove: (item: CartItem) => void
+    // onDelete: (item: CartItem) => void
+    // onDeleteAll: () => void
     setSignupOpen: (isOpen: boolean) => void
     setLoginOpen: (isOpen: boolean) => void
     handleLogoutClick: (e: React.MouseEvent<HTMLElement>) => void
@@ -22,9 +23,10 @@ interface OtherNavbarProps {
 
 
 export default function OtherNavbar(props: OtherNavbarProps) {
-    const { cartItems, onAdd, onRemove, onDelete, onDeleteAll, setLoginOpen, setSignupOpen,
+    const { setLoginOpen, setSignupOpen,
         handleLogoutClick, anchorEl, handleCloseLogout, handleLogoutRequest
     } = props;
+    const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket()
     const { authMember } = useGlobals()
     return (
         <div className="other-navbar">
@@ -60,13 +62,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
 
                         {/* BASKET */}
 
-                        <Basket cartItems={cartItems}
-                            onAdd={onAdd}
-                            onRemove={onRemove}
-                            onDelete={onDelete}
-                            onDeleteAll={onDeleteAll}
-
-                        />
+                        <Basket />
 
                         {!authMember ? (
                             <Box>

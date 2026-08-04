@@ -23,6 +23,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import { protocol } from "socket.io-client";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
+import useBasket from "../../hooks/useBasket";
 
 
 
@@ -41,12 +42,12 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({ prod
 
 
 
-interface ProductsProps {
-  onAdd: (item: CartItem) => void
-}
+// interface ProductsProps {
+//   onAdd: (item: CartItem) => void
+// }
 
-export default function Products(props: ProductsProps) {
-  const { onAdd } = props
+export default function Products() {
+  const { onAdd } = useBasket()
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever)
 

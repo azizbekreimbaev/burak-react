@@ -122,7 +122,7 @@ export default function OrdersPage() {
               </div>
               <div className={"spec-address-txt"}>
                 {authMember?.memberAddress ? authMember.memberAddress : "Do not exist"}
-                Do not exist</div>
+              </div>
             </Box>
           </Box>
           <Box className={"order-info-box"} sx={{ mt: "15px" }}>

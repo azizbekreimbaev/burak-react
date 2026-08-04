@@ -31,6 +31,7 @@ import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
 import { CartItem } from "../../../lib/types/search";
+import useBasket from "../../hooks/useBasket";
 
 /** REDUX SLICE*/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -45,12 +46,9 @@ const restaurantRetriever = createSelector(retrieveRestaurant, (restaurant) => (
 const chosenProductRetriever = createSelector(retrieveChosenProduct, (chosenProduct) => ({ chosenProduct })) //9
 
 
-interface ChosenProductProps {
-  onAdd: (item: CartItem) => void
-}
 
-export default function ChosenProduct(props: ChosenProductProps) {
-  const { onAdd } = props;
+export default function ChosenProduct() {
+  const { onAdd } = useBasket();
   const { productId } = useParams<{ productId: string }>();
   const { setRestaurant, setChosenProduct } = actionDispatch(useDispatch());
 

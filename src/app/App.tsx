@@ -28,7 +28,6 @@ import { useGlobals } from "./hooks/useGlobals";
 
 function App() {
   const location = useLocation();
-  const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket()
   const [signupOpen, setSignupOpen] = useState<boolean>(false)
   const [loginOpen, setLoginOpen] = useState<boolean>(false)
 
@@ -72,11 +71,11 @@ function App() {
     <>
       {location.pathname === "/" ?
         <HomeNavbar
-          cartItems={cartItems}
-          onAdd={onAdd}
-          onRemove={onRemove}
-          onDelete={onDelete}
-          onDeleteAll={onDeleteAll}
+          // cartItems={cartItems}
+          // onAdd={onAdd}
+          // onRemove={onRemove}
+          // onDelete={onDelete}
+          // onDeleteAll={onDeleteAll}
           setSignupOpen={setSignupOpen}
           setLoginOpen={setLoginOpen}
           anchorEl={anchorEl}
@@ -86,11 +85,11 @@ function App() {
         />
         :
         <OtherNavbar
-          cartItems={cartItems}
-          onAdd={onAdd}
-          onRemove={onRemove}
-          onDelete={onDelete}
-          onDeleteAll={onDeleteAll}
+          // cartItems={cartItems}
+          // onAdd={onAdd}
+          // onRemove={onRemove}
+          // onDelete={onDelete}
+          // onDeleteAll={onDeleteAll}
           setSignupOpen={setSignupOpen}
           setLoginOpen={setLoginOpen}
           anchorEl={anchorEl}
@@ -100,7 +99,7 @@ function App() {
         />}
       <Switch>
         <Route path="/products">
-          <ProductsPage onAdd={onAdd} />
+          <ProductsPage />
         </Route>
         <Route path="/orders">
           <OrdersPage />
