@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
 import { Member } from "../../lib/types/member";
-import useBasket from "./useBasket";
 import { BasketInterface } from "../../lib/types/basket";
 
 interface GlobalInterface {

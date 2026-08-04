@@ -16,8 +16,6 @@ import '../css/navbar.css'
 // @ts-ignore: Allow side-effect CSS import without type declarations
 import '../css/footer.css'
 import HelpPage from "./screens/helpPage";
-import Test from "./screens/Test";
-import useBasket from "./hooks/useBasket";
 import AuthenticationModal from "./components/auth";
 import { T } from "../lib/types/common";
 import { sweetErrorHandling, sweetTopSuccessAlert } from "../lib/sweetAlert";

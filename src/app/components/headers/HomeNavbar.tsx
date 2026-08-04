@@ -9,7 +9,6 @@ import { CartItem } from "../../../lib/types/search";
 import { useGlobals } from "../../hooks/useGlobals";
 import { serverApi } from "../../../lib/config";
 import { Logout } from "@mui/icons-material";
-import useBasket from "../../hooks/useBasket";
 
 
 interface HomeNavbarProps {
@@ -28,7 +27,6 @@ interface HomeNavbarProps {
 
 export default function HomeNavbar(props: HomeNavbarProps) {
     const { setLoginOpen, setSignupOpen, handleLogoutClick, anchorEl, handleCloseLogout, handleLogoutRequest } = props
-    const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket()
     const { authMember } = useGlobals()
 
     return (

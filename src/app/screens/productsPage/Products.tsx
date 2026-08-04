@@ -23,7 +23,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import { protocol } from "socket.io-client";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
-import useBasket from "../../hooks/useBasket";
+import { useGlobals } from "../../hooks/useGlobals";
 
 
 
@@ -47,7 +47,7 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({ prod
 // }
 
 export default function Products() {
-  const { onAdd } = useBasket()
+  const { basket } = useGlobals()
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever)
 
@@ -216,7 +216,7 @@ export default function Products() {
                         <div className={"product-sale"}>{sizeVolume}</div>
                         <Button className={"shop-btn"}
                           onClick={(e) => {
-                            onAdd({
+                            basket.onAdd({
                               _id: product._id,
                               quantity: 1,
                               name: product.productName,

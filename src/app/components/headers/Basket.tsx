@@ -12,7 +12,6 @@ import { Messages, serverApi } from "../../../lib/config";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
 import OrderService from "../../services/OrderService";
-import useBasket from "../../hooks/useBasket";
 
 // interface BAsketProps {
 //   cartItems: CartItem[];
@@ -23,10 +22,9 @@ import useBasket from "../../hooks/useBasket";
 // }
 
 export default function Basket() {
-  // const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props
-  const { authMember } = useGlobals();
+  const { authMember, basket } = useGlobals();
   const history = useHistory();
-  const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket()
+  const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = basket
   const itemsPrice = cartItems.reduce((a: number, c: CartItem) => {
     return a + c.quantity * c.price
   }, 0)
